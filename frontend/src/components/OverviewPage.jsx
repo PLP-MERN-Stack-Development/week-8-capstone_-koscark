@@ -59,13 +59,13 @@ function OverviewPage() {
     const fetchData = async () => {
       try {
         // Fetch total logged days
-        const daysResponse = await axios.get("/api/logs/count", {
+        const daysResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/logs/count`, {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setLoggedDays(daysResponse.data.count);
 
         // Fetch logs for selected date
-        const logsResponse = await axios.get(`/api/logs?date=${selectedDate}`, {
+        const logsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/logs?date=${selectedDate}`, {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setWellbeings(logsResponse.data.map(log => ({

@@ -55,7 +55,7 @@ function DashboardPage() {
 
     const fetchWellbeings = async () => {
       try {
-        const response = await axios.get("/api/wellbeings", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/wellbeings`, {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setWellbeings(response.data);
@@ -96,10 +96,16 @@ function DashboardPage() {
       return;
     }
     try {
-      setWellbeings([...wellbeings, wellbeing]);
+      const authToken = token || localStorage.getItem('token');
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/wellbeings`,
+        { name: trimmedName },
+        { headers: { Authorization: `Bearer ${authToken}` } }
+      );
+      setWellbeings([...wellbeings, response.data]);
       setIsModalOpen(false);
       setError("");
-      console.log('Well-being added to state:', wellbeing);
+      console.log('Well-being added to database:', response.data);
     } catch (err) {
       const errorMessage =
         err.response?.data?.error?.message || "Failed to add well-being";
@@ -118,7 +124,7 @@ function DashboardPage() {
     }
     try {
       const response = await axios.post(
-        "/api/logs",
+        `${import.meta.env.VITE_API_URL}/api/logs`,
         { wellbeingId, state, note, date: new Date().toISOString() },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );

@@ -14,7 +14,13 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // Local development
+    'https://week-8-capstone-koscark.vercel.app/' // Replace with your Vercel frontend URL
+  ],
+  credentials: true,
+}));
 app.use(logger); // Request logging
 app.use(security); // Security headers and rate limiting
 app.use(express.json());

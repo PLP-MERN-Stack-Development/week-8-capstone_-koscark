@@ -27,7 +27,7 @@ function ProfilePage() {
 
     const fetchWellbeings = async () => {
       try {
-        const response = await axios.get("/api/wellbeings", {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/wellbeings`, {
           headers: { Authorization: `Bearer ${authToken}` },
         });
         setWellbeings(response.data);
@@ -69,10 +69,16 @@ function ProfilePage() {
       return;
     }
     try {
-      setWellbeings([...wellbeings, wellbeing]);
+      const authToken = token || localStorage.getItem('token');
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/wellbeings`,
+        { name: trimmedName },
+        { headers: { Authorization: `Bearer ${authToken}` } }
+      );
+      setWellbeings([...wellbeings, response.data]);
       setIsAddWellbeingModalOpen(false);
       setError("");
-      console.log('Well-being added to state:', wellbeing);
+      console.log('Well-being added to database:', response.data);
     } catch (err) {
       const errorMessage =
         err.response?.data?.error?.message || "Failed to add well-being";
@@ -84,7 +90,7 @@ function ProfilePage() {
   const handleRemoveWellbeing = async (wellbeingId) => {
     try {
       const authToken = token || localStorage.getItem('token');
-      await axios.delete(`/api/wellbeings/${wellbeingId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/wellbeings/${wellbeingId}`, {
         headers: { Authorization: `Bearer ${authToken}` },
       });
       setWellbeings(wellbeings.filter(w => w._id !== wellbeingId));
@@ -108,18 +114,15 @@ function ProfilePage() {
     try {
       const authToken = token || localStorage.getItem('token');
       const response = await axios.put(
-        "/api/users/profile",
+        `${import.meta.env.VITE_API_URL}/api/users/profile`,
         { fullName: newName },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
-      // Update user in AuthContext
-      // Note: AuthContext should handle user update; for now, rely on page refresh
       setIsNameModalOpen(false);
       setNewName("");
       setError("");
       console.log('Name updated:', response.data);
-      // Force refresh to update user in AuthContext
-      window.location.reload();
+      window.location.reload(); // Temporary fix for AuthContext
     } catch (err) {
       const errorMessage =
         err.response?.data?.error?.message || "Failed to update name";
@@ -144,7 +147,7 @@ function ProfilePage() {
     try {
       const authToken = token || localStorage.getItem('token');
       await axios.put(
-        "/api/users/profile",
+        `${import.meta.env.VITE_API_URL}/api/users/profile`,
         { oldPassword, newPassword, confirmPassword },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
