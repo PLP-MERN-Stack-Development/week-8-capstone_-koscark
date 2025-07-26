@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173', // Local development
-    'https://week-8-capstone-koscark.vercel.app/' // Replace with your Vercel frontend URL
+    'https://week-8-capstone-koscark-im8cybfq4-oscars-projects-737c50f2.vercel.app' // Vercel frontend URL
   ],
   credentials: true,
 }));
@@ -48,3 +48,4 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
