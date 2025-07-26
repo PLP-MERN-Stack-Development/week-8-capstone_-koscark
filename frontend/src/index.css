@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&display=swap");
+@import "tailwindcss";
+
+body {
+  font-family: "Cormorant Garamond", serif;
+}
+
+/*
+Instructions for the pages:
+1. I have code for all the pages: LandingPage, SignUpPage, LogInPage, ForgotPasswordPage, DashboardPage, OverviewPage, Profile Page.
+2. The code however has a lot of unnecessary stuff for our project.*/
