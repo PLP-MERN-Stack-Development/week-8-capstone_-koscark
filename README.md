@@ -61,4 +61,4 @@ Authentication is implemented using JWT in `/backend/middleware/auth.js`, securi
 Middleware for logging (`logger.js`), validation (`validate.js`), and security (`security.js`) is implemented in `/backend/middleware`. Logging tracks API requests and responses, validation centralizes input checks, and security includes Helmet for HTTP headers and rate limiting to prevent abuse.
 
 ## Frontend Setup
-The frontend is set up in `/frontend` using React, Vite, and Tailwind CSS. Vite is configured to proxy API requests to the backend (`http://localhost:5000`). The setup is ready for building responsive UI components for the Landing, SignUp, LogIn, Forgot Password, and Dashboard pages.
+The frontend is set up in `/frontend` using React, Vite, and Tailwind CSS. Vite is configured to proxy API requests to the backend (`http://localhost:5000`). 
