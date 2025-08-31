@@ -39,7 +39,7 @@ The RESTful API endpoints and data flow for the application are documented in `/
 
 ## Project Roadmap
 
-The project roadmap with milestones is documented in `/docs/project-roadmap.md`. It outlines a 10-week timeline (July 24, 2025 - September 30, 2025) covering setup, backend, frontend, testing, deployment, and documentation.
+The project roadmap with milestones is documented in `/docs/project-roadmap.md`. It outlines a 10-week timeline  covering setup, backend, frontend, testing, deployment, and documentation.
 
 ## Technical Architecture
 
